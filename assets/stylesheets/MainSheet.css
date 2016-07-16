@@ -1,0 +1,31 @@
+.angular *{
+            padding: 5px;
+            margin:5px;
+            background-color:lightBlue;
+         }
+
+.angular .header
+         {
+             text-align: center;
+             height: 10%;
+             width: 800px;
+         }
+.angular .menu
+         {
+             height: 100px;
+             background-color:Gray;
+             text-align: center;
+             width: 300px;
+        }
+.angular .mainContent
+        {
+            width: 80%;
+            height: 700px
+        }
+
+.angular .footer
+         {
+             text-align: center;
+             height: 10%;
+             width: 800px;
+         }
