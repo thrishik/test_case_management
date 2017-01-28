@@ -1,30 +1,65 @@
 <h2>Using Rest Service</h2>
 
-<div ng-app="app" ng-controller="dataController">
-  <table>
-    <tr>
-      <th>login</th>
-      <th>type</th>
-      <th>dbkey</th>
-      <th>currentVersion</th>
-    </tr>
-    <tr ng-repeat="record in allRecords">
-      <td><a href="#record/{{record.name}}">{{record.login}}</a></td>
-      <td>{{record.id}}</td>
-      <td>{{record.mail}}</td>
-      <td>{{record.firstname}}</td>
-    </tr>
-  </table>
+<div ng-app="app" ng-controller="ConnectedTreesCtrl">
+  <script type="text/ng-template" id="nodes_renderer2.html">
+    <div class="tree-node">
+      <div class="pull-left tree-handle" ui-tree-handle>
+        <span class="glyphicon glyphicon-list"></span>
+      </div>
+      <div class="tree-node-content">
+        <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)">
+          <span class="glyphicon" ng-class="{
+            'glyphicon-chevron-right': collapsed,
+            'glyphicon-chevron-down': !collapsed
+            }">
+          </span>
+        </a>
 
-  {{recorddata.name}}
+        {{node.title}}
 
-  <div ng-view></div>
+        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+      </div>
+    </div>
+    <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+      <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer2.html'">
+      </li>
+    </ol>
+  </script>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>Tree 2</h3>
+      <div ui-tree id="tree2-root">
+        <ol ui-tree-nodes="" ng-model="tree2">
+          <li ng-repeat="node in tree2" ui-tree-node ng-include="'nodes_renderer2.html'"></li>
+        </ol>
+      </div>
+    </div>
+  </div>
 </div>
 
 <%= stylesheet_link_tag 'MainSheet.css',              :plugin => 'test_case_management', :media => 'all' %>
 <%= javascript_include_tag 'angular.min.js',          :plugin => 'test_case_management' %>
 <%= javascript_include_tag 'angular-route.min.js',    :plugin => 'test_case_management' %>
-<%= javascript_include_tag 'app/test_case_app.js',    :plugin => 'test_case_management' %>
-<%= javascript_include_tag 'app/test_case_ctrl.js',   :plugin => 'test_case_management' %>
-<%= javascript_include_tag 'app/test_case_helper.js', :plugin => 'test_case_management' %>
-<%= javascript_include_tag 'app/test_case_routes.js', :plugin => 'test_case_management' %>
+<%= javascript_include_tag 'ui-tree/angular-ui-tree.min.js',  :plugin => 'test_case_management' %>
+<%= javascript_include_tag 'app/connected-trees.js',  :plugin => 'test_case_management' %>
+
+<!--
+<%= javascript_include_tag "ui-tree/main.js",                   :plugin => 'test_case_management' %>
+<%= javascript_include_tag "ui-tree/controllers/handleCtrl.js", :plugin => 'test_case_management' %>
+<%= javascript_include_tag "ui-tree/controllers/nodeCtrl.js",   :plugin => 'test_case_management' %>
+<%= javascript_include_tag "ui-tree/controllers/nodesCtrl.js",  :plugin => 'test_case_management' %>
+<%= javascript_include_tag "ui-tree/controllers/treeCtrl.js",   :plugin => 'test_case_management' %>
+<%= javascript_include_tag "ui-tree/directives/uiTree.js",      :plugin => 'test_case_management' %>
+<%= javascript_include_tag "ui-tree/directives/uiTreeHandle.js",:plugin => 'test_case_management' %>
+<%= javascript_include_tag "ui-tree/directives/uiTreeNode.js",  :plugin => 'test_case_management' %>
+<%= javascript_include_tag "ui-tree/directives/uiTreeNodes.js", :plugin => 'test_case_management' %>
+<%= javascript_include_tag "ui-tree/services/helper.js",        :plugin => 'test_case_management' %>
+
+<%= javascript_include_tag "ui-tree/connected-trees.js",        :plugin => 'test_case_management' %> -->
+
+<%#= javascript_include_tag 'app/test_case_app.js',    :plugin => 'test_case_management' %>
+<%#= javascript_include_tag 'app/test_case_ctrl.js',   :plugin => 'test_case_management' %>
+<%#= javascript_include_tag 'app/test_case_helper.js', :plugin => 'test_case_management' %>
+<%#= javascript_include_tag 'app/test_case_routes.js', :plugin => 'test_case_management' %>
